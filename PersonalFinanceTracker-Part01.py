@@ -59,7 +59,7 @@ def add_transaction():
             continue
 
         # Get category as string
-        catogory = input("\nEnter the category: ")
+        catogory = input("\nEnter the category: ").capitalize()
 
         # Get transaction type as integer (1 for Income, 2 for Expense)
         try:
@@ -110,65 +110,66 @@ def update_transaction():
         print("No transactions to update!")
     else:
         view_transactions() # Show existing transactions
-        count = int(input("\nEnter the transaction number to update: "))
-        if 1 <= count <= len(transactions):
-            while True:
-                print("\n1 - Update Amount")
-                print("2 - Update Category")
-                print("3 - Update Type")
-                print("4 - Update Date")
+        while True:
+            count = int(input("\nEnter the transaction number to update: "))
+            if 1 <= count <= len(transactions):
+                while True:
+                    print("\n1 - Update Amount")
+                    print("2 - Update Category")
+                    print("3 - Update Type")
+                    print("4 - Update Date")
 
-                choice = input("\nEnter your choice: ")
-                if choice == '1':
-                    # Update amount with validation
-                    try:
-                        amount = int(input("\nEnter the amount: "))
-                        if amount < 0:
-                            print("Negative value does not get for an amount!")
+                    choice = input("\nEnter your choice: ")
+                    if choice == '1':
+                        # Update amount with validation
+                        try:
+                            amount = int(input("\nEnter the amount: "))
+                            if amount < 0:
+                                print("Negative value does not get for an amount!")
+                                continue
+                            transactions[count - 1][0] = amount
+                            print("Amount updated successfully!")
+                        except ValueError as amount_error:
+                            print(f"Invalid input for amount: {amount_error}")
                             continue
-                        transactions[count - 1][0] = amount
-                        print("Amount updated successfully!")
-                    except ValueError as amount_error:
-                        print(f"Invalid input for amount: {amount_error}")
-                        continue
-                elif choice == '2':
-                    # Update category string
-                    category = input("\nEnter the new category: ")
-                    transactions[count - 1][1] = category
-                    print("Category updated successfully!")
-                elif choice == '3':
-                    # Update transaction type with validation
-                    try:
-                        transaction_type = int(input("\nEnter the type of transaction(1-Income/2-Expense): "))
-                        if transaction_type == 1:
-                            transaction_type = "Income"
-                        elif transaction_type == 2:
-                            transaction_type = "Expense"
-                        else:
-                            print("Invalid transaction type. Please enter 1 for Income or 2 for Expense.")
+                    elif choice == '2':
+                        # Update category string
+                        category = input("\nEnter the new category: ")
+                        transactions[count - 1][1] = category
+                        print("Category updated successfully!")
+                    elif choice == '3':
+                        # Update transaction type with validation
+                        try:
+                            transaction_type = int(input("\nEnter the type of transaction(1-Income/2-Expense): "))
+                            if transaction_type == 1:
+                                transaction_type = "Income"
+                            elif transaction_type == 2:
+                                transaction_type = "Expense"
+                            else:
+                                print("Invalid transaction type. Please enter 1 for Income or 2 for Expense.")
+                                continue
+                            transactions[count - 1][2] = transaction_type
+                            print("Transaction type updated successfully!")
+                        except ValueError:
+                            print("Invalid input for transaction type. Please enter a number.")
                             continue
-                        transactions[count - 1][2] = transaction_type
-                        print("Transaction type updated successfully!")
-                    except ValueError:
-                        print("Invalid input for transaction type. Please enter a number.")
-                        continue
-                elif choice == '4':
-                    # Update date with format validation
-                    date = input("\nEnter the date (YYYY-MM-DD): ")
-                    try:
-                        date_obj = datetime.strptime(date, "%Y-%m-%d")
-                        transactions[count - 1][3] = date
-                        print("Date updated successfully!")
-                    except ValueError:
-                        print("Invalid date format!")
-                        continue
-                else:
-                    print("Invalid choice. Please try again.")
-                # Save changes after update
-                save_transactions()
-                break
-        else:
-            print("Invalid transaction number. Please try again!")
+                    elif choice == '4':
+                        # Update date with format validation
+                        date = input("\nEnter the date (YYYY-MM-DD): ")
+                        try:
+                            date_obj = datetime.strptime(date, "%Y-%m-%d")
+                            transactions[count - 1][3] = date
+                            print("Date updated successfully!")
+                        except ValueError:
+                            print("Invalid date format!")
+                            continue
+                    else:
+                        print("Invalid choice. Please try again.")
+                    # Save changes after update
+                    save_transactions()
+                    break
+            else:
+                print("Invalid transaction number. Please try again!")
 
 
 # Function to delete a transaction selected by user
