@@ -1,5 +1,97 @@
 [
-    [2000, "A", "Income", "2002-06-02"],
-    [3000, "B", "Expense", "2002-09-02"],
-    [2000, "B", "Income", "2003-02-02"]
+     {
+          "category": "Breakfast",
+          "amount": 200,
+          "date": "2002-01-02"
+     },
+     {
+          "category": "Breakfast",
+          "amount": 300,
+          "date": "2002-05-19"
+     },
+     {
+          "category": "Breakfast",
+          "amount": 200,
+          "date": "2002-01-02"
+     },
+     {
+          "category": "Breakfast",
+          "amount": 300,
+          "date": "2002-05-19"
+     },
+     {
+          "category": "Breakfast",
+          "amount": 200,
+          "date": "2002-01-02"
+     },
+     {
+          "category": "Breakfast",
+          "amount": 300,
+          "date": "2002-05-19"
+     },
+     {
+          "category": "Lunch",
+          "amount": 100,
+          "date": "2002-01-02"
+     },
+     {
+          "category": "Lunch",
+          "amount": 566,
+          "date": "2009-09-09"
+     },
+     {
+          "category": "Lunch",
+          "amount": 100,
+          "date": "2002-01-02"
+     },
+     {
+          "category": "Lunch",
+          "amount": 566,
+          "date": "2009-09-09"
+     },
+     {
+          "category": "Lunch",
+          "amount": 100,
+          "date": "2002-01-02"
+     },
+     {
+          "category": "Lunch",
+          "amount": 566,
+          "date": "2009-09-09"
+     },
+     {
+          "category": "Snacks",
+          "amount": 200,
+          "date": "2002-01-02"
+     },
+     {
+          "category": "Snacks",
+          "amount": 200,
+          "date": "2002-01-02"
+     },
+     {
+          "category": "Snacks",
+          "amount": 200,
+          "date": "2002-01-02"
+     },
+     {
+          "category": "Amount",
+          "amount": 200,
+          "date": "2002-01-02"
+     },
+     {
+          "category": "Amount",
+          "amount": 200,
+          "date": "2002-01-02"
+     },
+     {
+          "category": "Amount",
+          "amount": 200,
+          "date": "2002-01-02"
+     },
+     {
+          "category": "Internet",
+          "amount": 2000,
+          "date": "2002-03-03"
+     }
 ]
