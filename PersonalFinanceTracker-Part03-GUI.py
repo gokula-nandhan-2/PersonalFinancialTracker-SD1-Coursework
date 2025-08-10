@@ -8,7 +8,7 @@ class FinanceTrackerGUI:
         self.root.title("Personal Finance Tracker")
         self.root.iconbitmap("icon.ico")
 
-        height, width = 600, 800
+        height, width = 500, 630
         display_width = self.root.winfo_screenwidth()
         display_height = self.root.winfo_screenheight()
 
@@ -20,25 +20,58 @@ class FinanceTrackerGUI:
         self.transactions = self.load_transactions("transactions.json")
 
     def create_widgets(self):
+        # ---------- HEADER ----------
+        headerFrame = ttk.Frame(self.root)
+        headerFrame.pack(fill="x", pady=20, padx=20)
+
+        # Left side - Expenses label
+        expensesLabel = ttk.Label(headerFrame, text="DETAILS OF EXPENSES", font=("Verdana", 20, "bold"))
+        expensesLabel.pack(side="top", anchor="center")
+
+        # Search bar and button
+        searchFrame = ttk.Frame(self.root)
+        searchFrame.pack(pady=0, padx=20)
+
+        searchEntry = ttk.Entry(searchFrame, width=50, font=("Arial", 12))
+        searchEntry.pack(side="left", padx=(0,16), ipady=6)
+
+        # Style for button font
+        style = ttk.Style()
+        style.configure("Search.TButton", font=("Arial", 12, "bold"), padding=(10,2))
+
+        searchButton = ttk.Button(searchFrame, text="Search", command=self.search_transactions, style="Search.TButton")
+        searchButton.pack(side="left", ipady=6)
+        
         # Frame for table and scrollbar
+        tableFrame = ttk.Frame(self.root, width=600, height=350, relief="solid")
+        tableFrame.pack(side="bottom", pady=35, padx=20)
+        tableFrame.pack_propagate(False)
         
 
         # Treeview for displaying transactions
-        
+        table = ttk.Treeview(tableFrame, columns=("Expense", "Date", "Amount"), show="headings")
+        table.heading("Expense", text="Type of Expense")
+        table.heading("Date", text="Date")
+        table.heading("Amount", text="Amount")
+
+        table.column("Expense", width=200, anchor="w")
+        table.column("Date", width=100, anchor="center")
+        table.column("Amount", width=150, anchor="e")
+
+        # Change font for the whole Treeview (including headers and rows)
+        style = ttk.Style()
+        style.configure("Treeview", font=("Arial", 10), rowheight=50)           # font for rows
+        style.configure("Treeview.Heading", font=("Arial", 12, "bold"),padding=[10,10,10,10])  
 
         # Scrollbar for the Treeview
-        
+        vscrollbar = ttk.Scrollbar(tableFrame, orient="vertical", command=table.yview)
+        vscrollbar.pack(side="right", fill="y")
+        table.configure(yscrollcommand=vscrollbar.set)
+        table.pack(fill="both", expand=True)
 
-        # Search bar and button
-        self.search_icon = tk.PhotoImage(file="search.ico")
-        searchFrame = ttk.Frame(self.root)
-        searchFrame.pack(pady=20)
-        searchEntry = ttk.Entry(searchFrame, width=40)
-        searchEntry.pack(side=tk.LEFT, padx=(0, 10))
-        searchButton = ttk.Button(searchFrame, image=self.search_icon, command=self.search_transactions)
-        searchButton.pack(side=tk.LEFT)
 
-        pass
+
+
         
 
     def load_transactions(self, filename):
