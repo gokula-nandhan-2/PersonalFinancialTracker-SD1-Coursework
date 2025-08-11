@@ -20,30 +20,62 @@ class FinanceTrackerGUI:
         self.transactions = self.load_transactions("transactions.json")
 
     def create_widgets(self):
-        # ---------- HEADER ----------
-        headerFrame = ttk.Frame(self.root)
+        # Set the style for the entire application
+        self.root.configure(bg="#0E141B")
+        # Header frame
+        headerFrame = tk.Frame(self.root, bg="#0E141B")
         headerFrame.pack(fill="x", pady=20, padx=20)
 
         # Left side - Expenses label
-        expensesLabel = ttk.Label(headerFrame, text="DETAILS OF EXPENSES", font=("Verdana", 20, "bold"))
+        expensesLabel = tk.Label(headerFrame, 
+                                 text="DETAILS OF EXPENSES", 
+                                 font=("Verdana", 20, "bold"),
+                                 bg="#0E141B", 
+                                 fg="#4A90E2")
         expensesLabel.pack(side="top", anchor="center")
 
         # Search bar and button
-        searchFrame = ttk.Frame(self.root)
+        searchFrame = tk.Frame(self.root, bg="#0E141B")
         searchFrame.pack(pady=0, padx=20)
 
-        searchEntry = ttk.Entry(searchFrame, width=50, font=("Arial", 12))
-        searchEntry.pack(side="left", padx=(0,16), ipady=6)
+        # Style for search entry
+        style = ttk.Style()
+        style.theme_use("clam")
+        style.configure("Search.TEntry",
+                        fieldbackground="#252535",
+                        foreground="white",
+                        bordercolor="#4A90E2",
+                        insertcolor="white",
+                        padding=5,
+                        borderwidth=0,
+                        lightcolor="#4A90E2",
+                        )
+
+        searchEntry = ttk.Entry(searchFrame, width=50, font=("Arial", 12), style="Search.TEntry")
+        searchEntry.pack(side="left", padx=(0,16), ipady=3)
 
         # Style for button font
         style = ttk.Style()
-        style.configure("Search.TButton", font=("Arial", 12, "bold"), padding=(10,2))
+        style.theme_use("clam")
+        style.configure("Search.TButton", 
+                        font=("Arial", 12, "bold"), 
+                        padding=(10,2), 
+                        background="#4A90E2", 
+                        foreground="#FFFFFF", 
+                        borderwidth=0)
+        style.map("Search.TButton",
+              background=[("active", "#357ABD")],
+              foreground=[("active", "white")])
 
         searchButton = ttk.Button(searchFrame, text="Search", command=self.search_transactions, style="Search.TButton")
         searchButton.pack(side="left", ipady=6)
         
         # Frame for table and scrollbar
-        tableFrame = ttk.Frame(self.root, width=600, height=350, relief="solid")
+        tableFrame = tk.Frame(self.root, 
+                               width=600, 
+                               height=350, 
+                               bg="#2E2E42",
+                               )
         tableFrame.pack(side="bottom", pady=35, padx=20)
         tableFrame.pack_propagate(False)
         
@@ -60,7 +92,7 @@ class FinanceTrackerGUI:
 
         # Change font for the whole Treeview (including headers and rows)
         style = ttk.Style()
-        style.configure("Treeview", font=("Arial", 10), rowheight=50)           # font for rows
+        style.configure("Treeview", font=("Arial", 10), rowheight=50) # Font for rows
         style.configure("Treeview.Heading", font=("Arial", 12, "bold"),padding=[10,10,10,10])  
 
         # Scrollbar for the Treeview
