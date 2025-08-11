@@ -114,13 +114,15 @@ PersonalFinanceTracker_Part03.py
 
 ## Screenshots
 
-### Main Menu
+### CLI
 
-<img src="images/main_menu.png" alt="Main Menu" width="500">
+![](screenshots/CLI1.png)
+![](screenshots/CLI2.png)
 
-### Transaction Table
+### GUI
 
-<img src="images/transaction_table.png" alt="Transaction Table" width="500">
+![](screenshots/GUI1.png)
+![](screenshots/GUI2.png)
 
 ---
 
